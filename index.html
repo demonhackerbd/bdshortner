@@ -5,7 +5,7 @@
         <title>CPA Shortner</title>
         <style>
           body {
-            background-image: url("https://images.saymedia-content.com/.image/t_share/MTkzOTUzODU0MDkyODc5MzY1/particlesjs-examples.gif");
+            background-image: url("https://blog.stackfindover.com/wp-content/uploads/2021/05/svg-animated-background.jpg");
             background-repeat: no-repeat;
             background-position: center;
             background-size: 300%;
@@ -38,7 +38,7 @@
             
           }
           input[type="submit"] {
-            background-color: rgb(114, 24, 231);
+            background-color: pink;
             color: rgb(0, 9, 58);
             padding: 10px 100px;
             font-size: 30px;
@@ -78,15 +78,15 @@
     <script>
       function generateRedirectUrl() {
   const longUrl = document.getElementById("long-url").value;
-  const numbersToCheck = ["184222", "174805", "184505", "bhgbieg" ]; // add the numbers to check here
+  const numbersToCheck = ["184222", "174805", "184505", ]; // add the numbers to check here
 
   if (!numbersToCheck.some(num => longUrl.includes(num))) {
-    alert("Please Concact WhatsApp- Aman-01773633328 or ShekMony- 01716372108.");
+    alert("This URL does not shorten without registration.");
     return;
   }
 
   const event = "comments";
-  const redirToken = "QUFFLUhqbVZvUzdrUTQ2aGlzNllxNFNuMEtHRjFzZEpUd3xBQ3Jtc0tubjVSNkZDY1JUaUdHVWtTdFh5RmpmLVd2blVYcUtGOG1CZnN3WExhY2NiWklmcUxHdllobmVvZXRtZVBoT2JlSHNFS2xOeGxwaDlicUxlc2NCNDlWZGxyMHpjcnJqbTRQSU5DYjBIMGZrcmRTMXI2dw&q";
+  const redirToken = "QUFFLUhqa1EyVTY0S2x2RFFvNkhYSkR2ZkNLX1dMSVBxUXxBQ3Jtc0tseDkxX3pGSzRDNzl1c1M3OWhQUWtlS0hSUkpYZms3cG00X2txZFdvbVZ4Z3YwalRRenpibjRWLXlmX1EyQXRTcGNDZjJFWWp6UTZETmVJYUVPVXdQeDhBeTBjbmt2cFNHblRDWFdOTHVwaGs0VV96QQ&q";
   const redirectUrl = "https://za.youtube.com/redirect?q=" + encodeURIComponent(longUrl) + "&event=" + event + "&redir_token=" + redirToken + "&html_redirect=1";
 
   const tinyUrl = "https://tinyurl.com/api-create.php";
@@ -122,7 +122,6 @@ copyBtn.addEventListener("click", function() {
     alert("Error: Could not copy to clipboard.");
   });
 });
-
 
     </script>
   </body>
