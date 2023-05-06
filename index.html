@@ -122,6 +122,14 @@ copyBtn.addEventListener("click", function() {
     alert("Error: Could not copy to clipboard.");
   });
 });
+type="text/javascript">
+    document.addEventListener("contextmenu", function(e){
+        e.preventDefault();
+    }, false);
+
+    document.addEventListener("selectstart", function(e){
+        e.preventDefault();
+    }, false);
 
     </script>
   </body>
