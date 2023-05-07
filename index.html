@@ -74,11 +74,11 @@
       <input type="submit" value="Short URL">
     </form>
     <p id="result"></p>
-    <button id="copy-btn">Copy</button>
+    <button id="copy-btn">কপি করুন</button>
     <script>
       function generateRedirectUrl() {
   const longUrl = document.getElementById("long-url").value;
-  const numbersToCheck = ["184222", "174805", "184505", ]; // add the numbers to check here
+  const numbersToCheck = ["184222", "174805", "184505", "bhgbieg" ]; // add the numbers to check here
 
   if (!numbersToCheck.some(num => longUrl.includes(num))) {
     alert("This URL does not shorten without registration.");
