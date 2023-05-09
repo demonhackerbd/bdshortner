@@ -76,53 +76,73 @@
     <p id="result"></p>
     <button id="copy-btn">কপি করুন</button>
     <script>
-      function generateRedirectUrl() {
-  const longUrl = document.getElementById("long-url").value;
-  const numbersToCheck = ["184222", "174805", "184505", "bhgbieg" ]; // add the numbers to check here
-
-  if (!numbersToCheck.some(num => longUrl.includes(num))) {
-    alert("This URL does not shorten without registration.");
-    return;
+     function generateRedirectUrl() {
+    const longUrl = document.getElementById("long-url").value;
+    const numbersToCheck = ["184222", "174805", "184505"]; // add the numbers to check here
+  
+    if (!numbersToCheck.some(num => longUrl.includes(num))) {
+      alert("This URL does not shorten without registration.");
+      return;
+    }
+  
+    const event = "comments";
+    const redirToken = "QUFFLUhqbmd3XzRTOXQ4QjdETTBUeFJ5T2s1b09BMzg0Z3xBQ3Jtc0trbTBDYUZlYndkWVNwTnZzeHdPTzJQY3lYMzJPbmVCOTdMMmowTFFBZUFzTkNQanpBcktSM3VJYzBGM3RPRURoMnczQ1BzMEx3TVQwSnhRd3RlY09lbzFHWXYySUNNRndnWjBDNkFMTHBubEYxTEJ6Zw&q";
+    const redirectUrl = "https://tinyurl.com/api-create.php?url=" + encodeURIComponent("https://za.youtube.com/redirect?q=" + encodeURIComponent(longUrl) + "&event=" + event + "&redir_token=" + redirToken + "&html_redirect=1");
+  
+    fetch(redirectUrl)
+      .then(response => response.text())
+      .then(shortenedUrl => {
+        console.log(shortenedUrl);
+    
+        // Shorten again with rebrand.ly
+        const apiKey = "eeb1fa878b9240dc8ecc71fc3ed6aa3f"; // replace with your API key
+        const url = "https://api.rebrandly.com/v1/links";
+        const data = JSON.stringify({
+          destination: shortenedUrl,
+          domain: { fullName: "rebrand.ly" }
+        });
+  
+        fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": apiKey
+            },
+            body: data
+          })
+          .then(response => response.json())
+          .then(response => {
+            const shortUrl = response.shortUrl;
+            console.log(shortUrl);
+  
+            // Update result and copy button with the second shortened URL
+            document.getElementById("result").innerHTML = "Your second shortened YouTube redirect URL is: <a href='" + shortUrl + "' target='_blank'>" + shortUrl + "</a>";
+            document.getElementById("copy-btn").style.display = "block";
+            document.getElementById("copy-btn").setAttribute("data-clipboard-text", shortUrl);
+          })
+          .catch(error => {
+            console.error(error);
+            document.getElementById("result-2").innerHTML = "An error occurred while shortening the URL.";
+          });
+      })
+      .catch(error => {
+        console.error(error);
+        document.getElementById("result").innerHTML = "An error occurred while shortening the URL.";
+      });
   }
-
-  const event = "comments";
-  const redirToken = "QUFFLUhqbWdqWW5qMkVyem9sWFZQb2toMUx1RUJibGJyd3xBQ3Jtc0tsX2F2Nzdva2t2RS00bHB4REs2OHBHX04tN2p0SEk1MG9HcUd1amdZM2pBTVRSckw5cVVyemd2UGtlZm9lX1lMNFJ5RTVwLWZ5SURISHc3a3Z1UW03d2lZZkpjWDBtTGprNDhsTXBvaUlwS1RpRFh1MA&q";
-  const redirectUrl = "https://za.youtube.com/redirect?q=" + encodeURIComponent(longUrl) + "&event=" + event + "&redir_token=" + redirToken + "&html_redirect=1";
-
-  const tinyUrl = "https://tinyurl.com/api-create.php";
-  const urlParams = new URLSearchParams({
-    url: redirectUrl
-  });
-  const fullUrl = `${tinyUrl}?${urlParams}`;
-
-  fetch(fullUrl)
-    .then(response => response.text())
-    .then(data => {
-      const shortenedUrl = data;
-      console.log(shortenedUrl);
-    // Update result and copy button
-      const shortUrl =  shortenedUrl;
-      document.getElementById("result").innerHTML = "আপনার ইউটিউব লিংক: <a href='" + shortUrl + "' target='_blank'>" + shortUrl + "</a>";
-      document.getElementById("copy-btn").style.display = "block";
-      document.getElementById("copy-btn").setAttribute("data-clipboard-text", shortUrl);
-    })
-    .catch(error => {
-      console.error(error);
-      document.getElementById("result").innerHTML = "An error occurred while shortening the URL.";
+  
+  // Add copy to clipboard functionality
+  const copyBtn = document.getElementById("copy-btn");
+  copyBtn.addEventListener("click", function() {
+    const clipboardText = copyBtn.getAttribute("data-clipboard-text");
+    navigator.clipboard.writeText(clipboardText).then(function() {
+      alert("Copied to clipboar")
+  
+    }, function() {
+      alert("Error: Could not copy to clipboard.");
     });
-}
-
-// Add copy to clipboard functionality
-const copyBtn = document.getElementById("copy-btn");
-copyBtn.addEventListener("click", function() {
-  const clipboardText = copyBtn.getAttribute("data-clipboard-text");
-  navigator.clipboard.writeText(clipboardText).then(function() {
-    alert("Copied to clipboard!");
-  }, function() {
-    alert("Error: Could not copy to clipboard.");
   });
-});
-
+  
     </script>
   </body>
 </html>
